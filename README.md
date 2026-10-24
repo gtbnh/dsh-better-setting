@@ -1,5 +1,7 @@
 # Better Setting（更好的设置）
 
+[English](./README.en.md)
+
 在 DeepSeek Harness 会话界面的**右上角**（会话头部工具区，与“打开右侧边栏”相邻）增加一个
 **齿轮**入口。点开后弹出一个独立面板：左侧是 Harness“设置”的全部侧边栏选项（含已安装插件
 提供的分区，例如 Market、内置浏览器、Better Sidebar、Bili、Cost Meter 等），右侧**直接渲染
