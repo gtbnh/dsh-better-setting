@@ -6,8 +6,9 @@
 该分区真实的设置页面**——和在内置“设置”里点同一项看到的内容完全一致。
 
 - **搜索**：按名称（以及内部 id）即时过滤。
-- **显示 / 隐藏**：行尾“眼睛”图标切换；隐藏项收进底部“已隐藏”分组，可随时恢复。
+- **显示 / 隐藏**：行尾“眼睛”图标切换；隐藏项收进底部“已隐藏”分组，**点击隐藏项同样可在右侧渲染其设置页**，点眼睛图标即可恢复显示。
 - **排序**：拖拽行、行尾 ↑ / ↓、或聚焦行后 `Alt + ↑` / `Alt + ↓`；左下角“恢复默认”清空。
+- **图标**：优先使用插件在注册 `settings.section` 时传入的 `icon`（字符串图标名 / React 组件 / 元素），其次用内置映射，未知分区统一显示齿轮图标，与官方设置一致。
 - 键盘：`Esc` 关闭，`Tab` 在弹窗内循环。
 - 入口与会话头部一起渲染；切到“插件”等独立面板页时头部不显示，可从左下角账号菜单的
   “设置”打开同一个弹窗。
@@ -63,15 +64,24 @@
 
 ```
 action: "install_bundle"
-target: "E:\\projects\\dsh projects\\dsh-better-setting"
+target: "/path/to/dsh-better-setting"
 ```
 
-注意：profile 的 `package.json` 里这一项必须是 `link:E:/projects/dsh projects/dsh-better-setting`；
-若仍指向旧目录，插件会静默不加载（`fiberPhase: null`），表现为入口缺失。
+注意：profile 的 `package.json` 里这一项必须指向本插件目录（如
+`link:/path/to/dsh-better-setting`）；若仍指向旧目录，插件会静默不加载
+（`fiberPhase: null`），表现为入口缺失。
 
 安装后需重新加载窗口（`Ctrl+R`）或完全重启 Harness。停用：
 `plugin_manager` 的 `set_bundle`（`target: "dsh-better-setting"`，`enabled: false`），
 再重启即可恢复官方设置弹窗。
+
+## 开发
+
+```bash
+npm test          # 运行冒烟测试（无需 Harness 环境，模拟 loader / React / ctx）
+```
+
+冒烟测试覆盖座席注册、槽位声明、弹窗搜索/隐藏/排序与偏好持久化等核心行为。
 
 ## 结构
 
@@ -81,9 +91,10 @@ target: "E:\\projects\\dsh projects\\dsh-better-setting"
 | `lib/client.js` | 全部客户端逻辑：座席、右上角齿轮入口、弹窗、搜索/隐藏/排序、偏好存储、样式 |
 | `locale/zh.json` / `locale/en.json` | 插件元信息（标题、描述） |
 | `cordis.patch.yml` | Bundle 补丁：禁用官方设置外壳 + 插入本插件 |
+| `icon.svg` | 插件图标 |
 | `tools/smoke.mjs` | 无需 Harness 的冒烟测试（假 loader / React / ctx，覆盖座席与弹窗行为） |
 | `tools/asar.mjs` | 读取安装目录 asar 的小工具（list / grep / extract） |
-| `tools/dump-css.mjs` | 从 asar 里的客户端 bundle 提取注入的样式字符串 |
+| `tools/dump-css.mjs` / `tools/dump-css.js` / `tools/peek-css.mjs` | 从 asar 里的客户端 bundle 提取注入的样式字符串 |
 
 ## 已知限制
 
@@ -93,3 +104,7 @@ target: "E:\\projects\\dsh projects\\dsh-better-setting"
 - 若运行环境缺少 `react-dom`，弹窗退化为内联覆盖层（无 portal），功能不变。
 - 若注册失败（例如官方槽位结构变更），本插件会安静降级：应用照常启动，只是座席不出现；
   此时用 `set_bundle` 停用本插件并重启即可恢复官方设置。
+
+## License
+
+[MIT](./LICENSE)

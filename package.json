@@ -25,11 +25,11 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/your-username/dsh-better-setting.git"
+    "url": "https://github.com/gtbnh/dsh-better-setting.git"
   },
-  "homepage": "https://github.com/your-username/dsh-better-setting#readme",
+  "homepage": "https://github.com/gtbnh/dsh-better-setting#readme",
   "bugs": {
-    "url": "https://github.com/your-username/dsh-better-setting/issues"
+    "url": "https://github.com/gtbnh/dsh-better-setting/issues"
   },
   "license": "MIT",
   "dsh": {
