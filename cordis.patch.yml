@@ -1,0 +1,7 @@
+# dsh-better-setting bundle patch
+- id: ui-settings-general
+  name: '@deepseek-ai/dsh-client-ui-settings-general'
+  disabled: true
+- insert:
+    - id: better-setting
+      name: 'dsh-better-setting'

@@ -1,0 +1,58 @@
+{
+  "name": "dsh-better-setting",
+  "version": "0.6.3",
+  "description": "Better Setting: a gear entry in the session header opens a Settings popup that renders every Settings page inline, including plugin-provided ones, with search, show/hide toggles and reordering.",
+  "type": "module",
+  "main": "lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./client": "./lib/client.js",
+    "./locale/*.json": "./locale/*.json",
+    "./package.json": "./package.json"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "test": "node tools/smoke.mjs"
+  },
+  "keywords": [
+    "dsh",
+    "deepseek",
+    "deepseek-harness",
+    "settings",
+    "plugin"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/dsh-better-setting.git"
+  },
+  "homepage": "https://github.com/your-username/dsh-better-setting#readme",
+  "bugs": {
+    "url": "https://github.com/your-username/dsh-better-setting/issues"
+  },
+  "license": "MIT",
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "inject": [
+        "@deepseek-ai/dsh-client-locale",
+        "@deepseek-ai/dsh-client-ui-sidebar",
+        "@deepseek-ai/dsh-client-ui-slots"
+      ],
+      "platform": "web"
+    },
+    "manifestVersion": 1
+  },
+  "files": [
+    "lib/index.js",
+    "lib/client.js",
+    "cordis.patch.yml",
+    "icon.svg",
+    "README.md",
+    "locale/*.json"
+  ],
+  "icon": "./icon.svg"
+}
